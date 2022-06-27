@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import glob
 
 st.set_page_config(
     page_title="Street Tree Species",
@@ -13,10 +14,12 @@ def load_trees_data():
     usecols = ['created_at', 'tree_id', 'block_id', 'the_geom', 'tree_dbh',
                'stump_diam', 'curb_loc', 'status', 'health', 'spc_latin', 'spc_common',
                'address', 'zipcode', 'cb_num', 'boroname', 'nta', 'nta_name',
-               'boro_ct', 'latitude', 'longitude']
+               'boro_ct', 'Latitude', 'longitude']
 
-    data = pd.read_csv('streamlit/streamlit/2015StreetTreesCensus_TREES.csv', usecols=usecols)
-    data.rename({'latitude':'latitude'}, inplace=True)
+    data = pd.concat(map(pd.read_csv, glob.glob("trees_boro_data\*")), ignore_index=True)
+
+    # data = pd.read_csv(r'C:\Users\Mark\NYC Tree Data\2015StreetTreesCensus_TREES.csv', usecols=usecols)
+    data.rename({'Latitude': 'latitude'}, inplace=True)
     data['spc_common'] = data['spc_common'].str.title()
     return data
 

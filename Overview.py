@@ -4,6 +4,7 @@ import plotly.express as px
 import streamlit_folium
 import geopandas as gpd
 import json
+import glob
 
 
 st.set_page_config(
@@ -37,19 +38,6 @@ st.markdown(
 
 st.markdown("Now, as a geospatial nerd, this census provided me with tons of fun new data to play with. "
             "I've created this page to help do just that. **Scroll on to learn more!**")
-
-
-@st.cache
-def load_trees_data():
-    usecols = ['created_at', 'tree_id', 'block_id', 'the_geom', 'tree_dbh',
-               'stump_diam', 'curb_loc', 'status', 'health', 'spc_latin', 'spc_common',
-               'address', 'zipcode', 'cb_num', 'boroname', 'nta', 'nta_name',
-               'boro_ct', 'Latitude', 'longitude']
-
-    data = pd.read_csv(r'C:\Users\Mark\NYC Tree Data\2015StreetTreesCensus_TREES.csv', usecols=usecols)
-    data.rename({'Latitude': 'latitude'}, inplace=True)
-    data['spc_common'] = data['spc_common'].str.title()
-    return data
 
 
 def boroughs_map():
@@ -115,13 +103,6 @@ def boro_counts(species_boro_count):
                    'Manhattan': manhattan, 'Queens': queens,
                    'Staten Island': staten_island}
     return boro_counts
-
-data = load_trees_data()
-
-# set the trees data to session state
-# If count is already initialized, don't do anything
-if 'data' not in st.session_state:
-    st.session_state.data = data
 
 boroughs_map = boroughs_map()
 nta_map = nta_map()
