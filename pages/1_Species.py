@@ -11,12 +11,7 @@ st.set_page_config(
 
 @st.cache
 def load_trees_data():
-    usecols = ['created_at', 'tree_id', 'block_id', 'the_geom', 'tree_dbh',
-               'stump_diam', 'curb_loc', 'status', 'health', 'spc_latin', 'spc_common',
-               'address', 'zipcode', 'cb_num', 'boroname', 'nta', 'nta_name',
-               'boro_ct', 'Latitude', 'longitude']
-
-    data = pd.concat(map(pd.read_csv, glob.glob("trees_boro_data\*")), ignore_index=True)
+    data = pd.concat(map(pd.read_csv, glob.glob(r"data\trees_boro_data\*")), ignore_index=True)
 
     # data = pd.read_csv(r'C:\Users\Mark\NYC Tree Data\2015StreetTreesCensus_TREES.csv', usecols=usecols)
     data.rename({'Latitude': 'latitude'}, inplace=True)
@@ -36,7 +31,7 @@ def species_map(data):
 
 @st.cache
 def load_trees_species_count():
-    species_count = pd.read_csv('streamlit/streamlit/common_species_count.csv')
+    species_count = pd.read_csv('data/common_species_count.csv')
     return species_count
 
 
@@ -58,8 +53,9 @@ def bottom_20_species_chart(species_count):
 
 
 # Load or reload trees data if needed
-data = st.session_state.data
+data = load_trees_data()
 if 'data' not in st.session_state:
+    data = load_trees_data()
     st.session_state.data = data
 
 species = load_trees_species_count()
@@ -95,7 +91,7 @@ st.markdown('### Interactive Species Map')
 
 st.markdown("Finally, let's explore where we can find each species. "
             "Select a species from the drop down, and then check out the map below to see where we can find it. "
-            "The trees are sorted from most to least common - so be sure to check out those trees at the bottom!")
+            "The trees are sorted alphabetically, so be sure to look for the most and least common species!")
 
 col3, colmap, col4 = st.columns([1, 3, 1])
 

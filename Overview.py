@@ -41,7 +41,7 @@ st.markdown("Now, as a geospatial nerd, this census provided me with tons of fun
 
 
 def boroughs_map():
-    boroughs_gpd = gpd.read_file(r'C:\Users\Mark\NYC Tree Data\boroughs_with_stats.geojson').set_index("Boro")
+    boroughs_gpd = gpd.read_file(r'data\boroughs_with_stats.geojson').set_index("Boro")
 
     m = px.choropleth_mapbox(boroughs_gpd, geojson=boroughs_gpd.geometry, locations=boroughs_gpd.index,
                              color=boroughs_gpd['Count of Trees'],
@@ -56,7 +56,7 @@ def boroughs_map():
 
 
 def nta_map():
-    nta_gpd = gpd.read_file(r'C:\Users\Mark\NYC Tree Data\ntas_with_stats.geojson').set_index("NTA")
+    nta_gpd = gpd.read_file(r'data\ntas_with_stats.geojson').set_index("NTA")
 
     m = px.choropleth_mapbox(nta_gpd, geojson=nta_gpd.geometry,
                              locations=nta_gpd.index,
@@ -73,7 +73,7 @@ def nta_map():
 
 
 def hex_map():
-    hex_gpd = gpd.read_file(r'C:\Users\Mark\NYC Tree Data\quarter_mile_trees.geojson')
+    hex_gpd = gpd.read_file(r'data\quarter_mile_trees.geojson')
 
     m = px.choropleth_mapbox(hex_gpd, geojson=hex_gpd.geometry,
                              locations=hex_gpd.index,
