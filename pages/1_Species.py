@@ -11,7 +11,7 @@ st.set_page_config(
 
 @st.cache
 def load_trees_data():
-    data = pd.concat(map(pd.read_csv, glob.glob(r"data\trees_boro_data\*")), ignore_index=True)
+    data = pd.concat(map(pd.read_csv, glob.glob(r"data/trees_boro_data/*")), ignore_index=True)
 
     # data = pd.read_csv(r'C:\Users\Mark\NYC Tree Data\2015StreetTreesCensus_TREES.csv', usecols=usecols)
     data.rename({'Latitude': 'latitude'}, inplace=True)
