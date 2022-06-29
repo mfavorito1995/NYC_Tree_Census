@@ -76,7 +76,7 @@ st.markdown("### Most and Least Common Trees")
 st.markdown("Now, let's take a look at all the different species of trees found on New York's streets. "
             "These two charts show the 20 most and least common trees in the city, while the interactive table to the right lists out the count for every identified species.")
 
-coll, col1, col2, colgap, coltable, colr = st.columns([0.2, 2, 2, 0.25, 1, 0.2])
+coll, col1, col2, colgap, coltable, colr = st.columns([0.1, 2, 2, 0.2, 1, 0.1])
 
 col1.subheader("20 Most Common Species")
 col1.plotly_chart(top20chart, use_container_width=True)
