@@ -93,7 +93,7 @@ st.markdown("Finally, let's explore where we can find each species. "
             "Select a species from the drop down, and then check out the map below to see where we can find it. "
             "The species are sorted from most to least common, so be sure to scroll down to see some of the rarer ones!")
 
-col3, colmap, col4 = st.columns([1, 3, 1])
+col3, colmap, col4 = st.columns([0.5, 3, 0.5])
 
 with colmap:
     option = st.selectbox(
